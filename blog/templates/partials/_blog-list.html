@@ -1,0 +1,22 @@
+        <!-- Blog entries-->
+        
+        
+            <!-- Other blog posts with pagination-->
+            <div class="row">
+                {% for post in page_obj %}
+                    <div class="col-lg-6">
+                        <div class="card mb-4">
+                            <a href="{% url 'blog_detail' slug=post.slug %}"><img class="card-img-top" src="{{ post.photo.url }}" alt="{{ post.title }}" /></a>
+                            <div class="card-body">
+                                <div class="small text-muted">{{ post.date }}</div>
+                                <h2 class="card-title">{{ post.title }}</h2>
+                                <p class="card-text">{{ post.description_summary }}</p>
+                                <a class="btn btn-primary" href="{% url 'blog_detail' slug=post.slug %}">Read more →</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:2 and not forloop.last %}
+                        </div><div class="row">  {# Her iki posttan sonra yeni bir satır başlat #}
+                    {% endif %}
+                {% endfor %}
+            </div>
